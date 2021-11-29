@@ -3,6 +3,7 @@ local hsl = lush.hsl
 
 local mid_black = hsl("#1d1d26")
 local mid_white = hsl("#b3b3d4")
+local white     = mid_white.lighten(50)
 
 local pink      = hsl("#ff3399")
 local blue      = hsl("#00bfff")
@@ -17,15 +18,17 @@ local fg        = mid_white
 
 local theme = lush(function()
   return {
-    Normal { bg = bg, fg = fg }, -- normal text
+    Normal       { bg = bg, fg = fg },
 
-    CursorLine { bg = Normal.bg.lighten(5) }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if foreground (ctermfg OR guifg) is not set.
+    Cursor       { bg = mid_white },
+    CursorLine   { bg = Normal.bg.lighten(5) },
     CursorColumn { CursorLine },
 
-    Comment { fg = bg.lighten(30), gui="italic" },
+    Comment      { fg = bg.lighten(30), gui="italic" },
 
-    LineNr       { bg = Normal.bg.da(10), fg = Normal.bg.li(20) }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
-    CursorLineNr { bg = CursorLine.bg, fg = Normal.fg.ro(180) }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
+    LineNr       { bg = Normal.bg.da(10), fg = Normal.bg.li(30) },
+    CursorLineNr { bg = CursorLine.bg, fg = Normal.fg.ro(180) },
+    EndOfBuffer  { LineNr, bg = bg },
 
     Search       { bg= orange, fg = orange.darken(90) },
     IncSearch    { bg = Search.bg.ro(-20), fg = Search.fg.da(90) },
@@ -35,11 +38,16 @@ local theme = lush(function()
     ReplaceCursor   { bg = orange },
     CommandCursor   { bg = purple },
 
+    Visual { bg = bg.lighten(15) },
+
+    ErrorMsg { fg = pink },
+    MsgArea { bg = bg },
+
     VertSplit       { fg = bg.lighten(20), bg = bg },
     SignColumn      { bg = bg },
 
     TabLine                           { fg = bg.lighten(30), bg = bg_dark },
-    TabLineSel                        { fg = fg, bg = bg },
+    TabLineSel                        { fg = fg.lighten(10), bg = bg, gui = "bold" },
     TabLineFill                       { fg = fg, bg = bg_dark },
     TabLineSeparatorActive            { fg = pink, bg = bg },
     TabLineSeparatorInactive          { fg = bg.lighten(30), bg = bg_dark },
@@ -51,6 +59,24 @@ local theme = lush(function()
     TabLineModifiedInactive           { fg = fg, bg = bg_dark },
     TabLineCloseActive                { fg = fg, bg = bg, gui = "bold" },
     TabLineCloseInactive              { fg = bg.lighten(30), bg = bg_dark, gui = "bold" },
+
+    StatusLine { fg = pink },
+    StatusLineNC { fg = pink },
+
+    StatusLineNormalA { fg = white, bg = pink.darken(20) },
+    StatusLineNormalB { fg = white, bg = bg.lighten(10)},
+    StatusLineNormalC { fg = white, bg = bg.lighten(5) },
+    StatusLineInsert { fg = white, bg = green.darken(20) },
+    StatusLineReplace { fg = bg, bg = orange.darken(20) },
+    StatusLineCommand { fg = white, bg = purple.darken(20) },
+
+    MatchParen { bg = pink.darken(50), gui = "bold" },
+    MatchWord { bg = pink.darken(80), gui = "bold" },
+
+    Title { fg = pink, gui = "bold" },
+    MoreMsg { fg = green, gui = "bold" },
+    NonText { fg = LineNr.fg.darken(40), gui = "bold" },
+
 
     SpellBad        { gui = "undercurl", sp = pink.darken(30) },
     SpellCap        { gui = "undercurl", sp = blue.darken(30) },
@@ -82,6 +108,7 @@ local theme = lush(function()
     TSInclude       { fg = pink, gui = "bold" },
 
     TSTag           { fg = pink },
+    tsxTSTag        { fg = pink },
     TSTagAttribute  { fg = green },
     TSTagDelimiter  { fg = fg },
 
@@ -90,7 +117,7 @@ local theme = lush(function()
     TSVariableBuiltin      { fg = orange.darken(30), gui = "bold" },
 
     TSConstructor   { fg = fg },
-    tsxTSConstructor   { fg = pink },
+    tsxTSConstructor   { fg = fg },
 
     TSFuncBuiltin   { fg = turquoise },
     TSPunctBracket  { fg = fg },
@@ -154,6 +181,13 @@ local theme = lush(function()
     GitGutterChange             { fg = orange, bg = orange.darken(80) },
     GitGutterChangeDelete       { fg = orange, bg = orange.darken(80) },
     GitGutterDelete             { fg = pink, bg = pink.darken(80) },
+
+    DiffAdd { bg = GitGutterAdd.bg },
+    DiffChange { bg = GitGutterChange.bg },
+    DiffDelete { bg = GitGutterDelete.bg },
+    DiffText { gui = "bold" },
+
+    gitcommitFirstLine { fg = blue, gui = "bold" },
 
     cssClassName        { fg = green },
     cssBraces           { fg = fg },
