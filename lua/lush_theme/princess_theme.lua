@@ -70,8 +70,8 @@ local theme = lush(function()
     StatusLineReplace { fg = bg, bg = orange.darken(20) },
     StatusLineCommand { fg = white, bg = purple.darken(20) },
 
-    MatchParen { bg = pink.darken(50), gui = "bold" },
-    MatchWord { bg = pink.darken(80), gui = "bold" },
+    MatchParen { bg = blue.darken(70), gui = "bold" },
+    MatchWord { bg = blue.darken(70), gui = "bold" },
 
     Title { fg = pink, gui = "bold" },
     MoreMsg { fg = green, gui = "bold" },
@@ -108,8 +108,11 @@ local theme = lush(function()
     TSInclude       { fg = pink, gui = "bold" },
 
     TSTag           { fg = pink },
+    tsxTag          { fg = pink },
+    tsxTagName      { fg = pink },
     tsxTSTag        { fg = pink },
     TSTagAttribute  { fg = green },
+    tsxAttrib       { fg = green },
     TSTagDelimiter  { fg = fg },
 
     Variable        { fg = fg },
@@ -171,6 +174,10 @@ local theme = lush(function()
     DiagnosticVirtualTextHint     { DiagnosticHint, bg = DiagnosticHint.fg.darken(80) },
     LspDiagnosticsDefaultHint     { DiagnosticVirtualTextHint },
     LspDiagnosticsVirtualTextHint { DiagnosticVirtualTextHint  },
+
+    LspReferenceText              { bg = bg.lighten(10), gui = "underline", sp = bg.lighten(30) },
+    LspReferenceWrite             { bg = bg.lighten(10), gui = "underline", sp = bg.lighten(30) },
+    LspReferenceRead              {  bg = bg.lighten(10), gui = "underline", sp = bg.lighten(30) },
 
     TelescopeBorder             { fg = purple },
     TelescopeSelection          { fg = fg.lighten(10), bg = bg.lighten(10), gui = "bold" },
