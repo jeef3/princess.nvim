@@ -99,7 +99,7 @@ local theme = lush(function()
     TSConditional   { fg = pink, gui = "bold" },
     Repeat          { fg = pink },
     Label           { fg = pink, gui = "bold" },
-    Operator        { fg = pink, gui = "bold" },
+    Operator        { fg = pink },
     PreProc         { fg = pink, gui = "bold" },
     Keyword         { fg = blue, gui = "bold italic" },
     TSKeywordReturn { fg = pink, gui = "bold" },
