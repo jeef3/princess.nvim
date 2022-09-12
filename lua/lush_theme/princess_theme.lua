@@ -133,10 +133,23 @@ local theme = lush(function()
     TSProperty      { fg = fg },
     TSMethod        { fg = green },
 
-    Pmenu           { fg = fg, bg = bg.lighten(3) },
-    PmenuSbar       { fg = fg, bg = bg.lighten(10) },
-    PmenuThumb      { fg = fg, bg = bg.lighten(20) },
-    PmenuSel          { fg = fg.lighten(10), bg = blue.darken(60), gui = "bold" },
+    Pmenu           { fg = fg, bg = bg.lighten(10) },
+    PmenuSbar       { fg = fg, bg = bg.lighten(20) },
+    PmenuThumb      { fg = fg, bg = bg.lighten(30) },
+    PmenuSel        { fg = fg.lighten(10), bg = blue.darken(50), gui = "bold" },
+
+    CmpItemAbbrDeprecated         { fg = fg },
+    CmpItemAbbrMatch              { fg = blue },
+    CmpItemAbbrMatchFuzzy         { fg = blue },
+
+    CmpItemKindVariable           { fg = green },
+    CmpItemKindInterface          { fg = green },
+    CmpItemKindText               { fg = green },
+    CmpItemKindFunction           { fg = pink },
+    CmpItemKindMethod             { fg = pink },
+    CmpItemKindKeyword            { fg = fg },
+    CmpItemKindProperty           { fg = fg },
+    CmpItemKindUnit               { fg = fg },
 
     DiagnosticError               { fg = pink },
     DiagnosticDefaultError        { DiagnosticError },
