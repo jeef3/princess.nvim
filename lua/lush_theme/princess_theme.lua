@@ -16,13 +16,21 @@ local bg        = mid_black
 local bg_dark   = mid_black.darken(20)
 local fg        = mid_white
 
-local theme = lush(function()
+local pink_bg   = pink.mix(bg, 50).darken(50)
+local blue_bg   = blue.mix(bg, 50).darken(50)
+local green_bg  = green.mix(bg, 50).darken(50)
+local orange_bg = orange.mix(bg, 50).darken(50)
+
+local theme = lush(function(injected_functions)
+  local sym = injected_functions.sym
+
   return {
     Normal       { bg = bg, fg = fg },
 
     Cursor       { bg = mid_white },
     CursorLine   { bg = Normal.bg.lighten(5) },
     CursorColumn { CursorLine },
+    ColorColumn  { bg = Normal.bg.darken(10) },
 
     Comment      { fg = bg.lighten(30), gui="italic" },
 
@@ -61,7 +69,7 @@ local theme = lush(function()
     TabLineCloseInactive              { fg = bg.lighten(30), bg = bg_dark, gui = "bold" },
 
     StatusLine { fg = pink },
-    StatusLineNC { fg = pink },
+    StatusLineNC { fg = pink.darken(50) },
 
     StatusLineNormalA { fg = white, bg = pink.darken(20) },
     StatusLineNormalB { fg = white, bg = bg.lighten(10)},
@@ -128,6 +136,7 @@ local theme = lush(function()
 
     TSParameter     { fg = orange, gui = "italic" },
 
+    Type            { fg = fg },
     TSType          { fg = fg },
     TSTypeBuiltin   { fg = blue, gui = "italic" },
     TSProperty      { fg = fg },
@@ -153,10 +162,11 @@ local theme = lush(function()
 
     DiagnosticError               { fg = pink },
     DiagnosticDefaultError        { DiagnosticError },
+    DiagnosticUnderlineError      { gui = "undercurl", sp = DiagnosticError.fg },
+
     LspDiagnosticsError           { DiagnosticError },
     LspDiagnosticsSignError       { DiagnosticError },
     LspDiagnosticsFloatingError   { DiagnosticError },
-    DiagnosticUnderlineError      { gui = "undercurl", sp = DiagnosticError.fg },
     LspDiagnosticsUnderlineError  { DiagnosticUnderlineError },
 
     DiagnosticVirtualTextError     { DiagnosticError, bg = DiagnosticError.fg.darken(80) },
@@ -188,6 +198,11 @@ local theme = lush(function()
     LspDiagnosticsDefaultHint     { DiagnosticVirtualTextHint },
     LspDiagnosticsVirtualTextHint { DiagnosticVirtualTextHint  },
 
+    DiagnosticLineNrError         { fg = pink,   bg = pink_bg,   gui = "bold" },
+    DiagnosticLineNrWarn          { fg = orange, bg = orange_bg, gui = "bold" },
+    DiagnosticLineNrInfo          { fg = blue,   bg = blue_bg,   gui = "bold" },
+    DiagnosticLineNrHint          { fg = turquoise, bg = blue_bg,gui = "bold" },
+
     LspReferenceText              { bg = bg.lighten(10), gui = "underline", sp = bg.lighten(30) },
     LspReferenceWrite             { bg = bg.lighten(10), gui = "underline", sp = bg.lighten(30) },
     LspReferenceRead              {  bg = bg.lighten(10), gui = "underline", sp = bg.lighten(30) },
@@ -197,17 +212,20 @@ local theme = lush(function()
     TelescopeSelectionCaret     { fg = purple },
     TelescopeMatching           { fg = blue },
 
-    GitGutterAdd                { fg = green, bg = green.darken(80) },
-    GitGutterChange             { fg = orange, bg = orange.darken(80) },
-    GitGutterChangeDelete       { fg = orange, bg = orange.darken(80) },
-    GitGutterDelete             { fg = pink, bg = pink.darken(80) },
-
-    DiffAdd { bg = GitGutterAdd.bg },
-    DiffChange { bg = GitGutterChange.bg },
-    DiffDelete { bg = GitGutterDelete.bg },
-    DiffText { gui = "bold" },
+    GitGutterAdd                { fg = green, bg = green_bg },
+    GitGutterChange             { fg = blue,  bg = blue_bg },
+    GitGutterChangeDelete       { fg = blue,  bg = blue_bg },
+    GitGutterDelete             { fg = pink,  bg = pink_bg },
+ 
+    DiffAdd                     { bg = GitGutterAdd.bg },
+    DiffChange                  { bg = GitGutterChange.bg },
+    DiffDelete                  { fg = Comment.fg },
+    DiffText                    { bg = blue_bg.lighten(20) },
 
     gitcommitFirstLine { fg = blue, gui = "bold" },
+
+    Folded     { fg = Comment.fg, bg = bg.lighten(10), gui = "italic" },
+    FoldColumn { fg = Comment.fg, bg = bg },
 
     cssClassName        { fg = green },
     cssBraces           { fg = fg },
@@ -233,6 +251,17 @@ local theme = lush(function()
 
     cssTSKeyword        { fg = pink, gui = "bold" },
     cssTSProperty       { fg = green },
+    
+    sym("@keyword.return")        { fg = pink, gui = "bold" },
+    sym("@punctuation.bracket")   { fg = fg },
+    sym("@punctuation.delimiter") { fg = fg, gui = "bold" },
+    sym("@parameter")             { fg = orange, gui = "italic" },
+    sym("@constructor")           { fg = fg },
+    sym("@property")              { fg = fg },
+
+    sym("@tag")           { fg = pink },
+    sym("@tag.delimeter") { fg = fg },
+    sym("@tag.attribute") { fg = turquoise },
   }
 end)
 
