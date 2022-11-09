@@ -110,7 +110,6 @@ local theme = lush(function(injected_functions)
     Operator        { fg = pink },
     PreProc         { fg = pink, gui = "bold" },
     Keyword         { fg = blue, gui = "bold italic" },
-    TSKeywordReturn { fg = pink, gui = "bold" },
 
     TSConstBuiltin  { fg = purple, gui = "bold" },
     TSInclude       { fg = pink, gui = "bold" },
@@ -223,6 +222,7 @@ local theme = lush(function(injected_functions)
     DiffText                    { bg = blue_bg.lighten(20) },
 
     gitcommitFirstLine { fg = blue, gui = "bold" },
+    gitcommitBranch    { fg = orange, gui = "bold" },
 
     Folded     { fg = Comment.fg, bg = bg.lighten(10), gui = "italic" },
     FoldColumn { fg = Comment.fg, bg = bg },
@@ -252,16 +252,29 @@ local theme = lush(function(injected_functions)
     cssTSKeyword        { fg = pink, gui = "bold" },
     cssTSProperty       { fg = green },
     
+    -- Newer syntax
+    
+    sym("@keyword")               { fg = blue, gui = "bold italic" },
     sym("@keyword.return")        { fg = pink, gui = "bold" },
+
     sym("@punctuation.bracket")   { fg = fg },
     sym("@punctuation.delimiter") { fg = fg, gui = "bold" },
+
     sym("@parameter")             { fg = orange, gui = "italic" },
+
     sym("@constructor")           { fg = fg },
+
     sym("@property")              { fg = fg },
+
+    sym("@function.builtin")      { fg = turquoise },
+
+    sym("@constant.builtin")      { fg = purple, gui = "bold" },
 
     sym("@tag")           { fg = pink },
     sym("@tag.delimeter") { fg = fg },
     sym("@tag.attribute") { fg = turquoise },
+
+    sym("@text.danger") { fg = pink, gui = "bold" },
   }
 end)
 
