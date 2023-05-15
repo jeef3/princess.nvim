@@ -74,7 +74,10 @@ local theme = lush(function(injected_functions)
 
     StatusLineNormalA({ fg = white, bg = pink.darken(20) }),
     StatusLineNormalB({ fg = white, bg = bg.lighten(10) }),
-    StatusLineNormalC({ fg = white, bg = bg.lighten(5) }),
+    StatusLineNormalC({ fg = bg.lighten(50), bg = bg.lighten(5) }),
+    StatusLineInactiveA({ fg = white.darken(30), bg = pink.darken(20) }),
+    StatusLineInactiveB({ fg = white.darken(30), bg = bg.lighten(10) }),
+    StatusLineInactiveC({ fg = bg.lighten(50), bg = bg.lighten(5) }),
     StatusLineInsert({ fg = white, bg = green.darken(20) }),
     StatusLineReplace({ fg = bg, bg = orange.darken(20) }),
     StatusLineCommand({ fg = white, bg = purple.darken(20) }),
@@ -296,28 +299,35 @@ local theme = lush(function(injected_functions)
     SagaNormal({ fg = fg, bg = bg }),
 
     -- Newer syntax
+    sym("@conditional.ternary")({ fg = pink, gui = "bold" }),
+
     sym("@constant.builtin")({ fg = purple, gui = "bold" }),
 
-    sym("@constructor")({ fg = fg }),
+    sym("@constructor")({ fg = blue }),
 
-    sym("@keyword")({ fg = blue, gui = "bold italic" }),
+    sym("@keyword")({ fg = pink, gui = "bold" }),
+    sym("@keyword.function")({ fg = blue, gui = "bold italic" }),
     sym("@keyword.return")({ fg = pink, gui = "bold" }),
 
     sym("@function.builtin")({ fg = turquoise }),
     sym("@function.call")({ fg = green }),
+    sym("@function.css")({ fg = turquoise }),
 
     sym("@parameter")({ fg = orange, gui = "italic" }),
 
     sym("@property")({ fg = fg }),
+    sym("@property.css")({ fg = blue, gui = "italic" }),
 
-    sym("@punctuation.bracket")({ fg = fg }),
+    sym("@punctuation.bracket")({ fg = orange }),
     sym("@punctuation.delimiter")({ fg = fg, gui = "bold" }),
+    sym("@punctuation.special")({ fg = pink }),
 
     sym("@tag")({ fg = pink }),
-    sym("@tag.attribute")({ fg = turquoise }),
-    sym("@tag.delimeter")({ fg = fg }),
+    sym("@tag.attribute")({ fg = green }),
+    sym("@tag.delimiter")({ fg = fg }),
 
     sym("@text.danger")({ fg = pink, gui = "bold" }),
+    sym("@text.todo")({ fg = pink, gui = "bold" }),
 
     sym("@type.qualifier")({ fg = purple, gui = "bold" }),
     sym("@type.builtin")({ fg = purple, gui = "bold" }),
