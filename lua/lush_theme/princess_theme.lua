@@ -239,6 +239,8 @@ local theme = lush(function(injected_functions)
     TelescopeSelectionCaret({ fg = purple }),
     TelescopeMatching({ fg = blue }),
 
+    -- Noice
+
     GitGutterAdd({ fg = green, bg = green_bg }),
     GitGutterChange({ fg = blue, bg = blue_bg }),
     GitGutterChangeDelete({ fg = blue, bg = blue_bg }),
@@ -301,13 +303,18 @@ local theme = lush(function(injected_functions)
     -- Newer syntax
     sym("@conditional.ternary")({ fg = pink, gui = "bold" }),
 
-    sym("@constant.builtin")({ fg = purple, gui = "bold" }),
+    sym("@constant.builtin")({ fg = purple }),
 
     sym("@constructor")({ fg = blue }),
 
-    sym("@keyword")({ fg = pink, gui = "bold" }),
+    sym("@keyword")({ fg = fg }),
     sym("@keyword.function")({ fg = blue, gui = "bold italic" }),
     sym("@keyword.return")({ fg = pink, gui = "bold" }),
+    sym("@keyword.import")({ fg = pink, gui = "bold" }),
+    sym("@keyword.conditional")({ fg = pink, gui = "bold" }),
+    sym("@keyword.coroutine")({ fg = pink, gui = "bold" }),
+
+    sym("@markup.heading")({ gui = "bold" }),
 
     sym("@function.builtin")({ fg = turquoise }),
     sym("@function.call")({ fg = green }),
@@ -319,10 +326,11 @@ local theme = lush(function(injected_functions)
     sym("@property.css")({ fg = blue, gui = "italic" }),
 
     sym("@punctuation.bracket")({ fg = orange }),
-    sym("@punctuation.delimiter")({ fg = fg, gui = "bold" }),
+    sym("@punctuation.delimiter")({ fg = pink, gui = "bold" }),
     sym("@punctuation.special")({ fg = pink }),
 
-    sym("@tag")({ fg = pink }),
+    sym("@tag")({ fg = blue }),
+    sym("@tag.builtin")({ fg = pink }),
     sym("@tag.attribute")({ fg = green }),
     sym("@tag.delimiter")({ fg = fg }),
 
@@ -330,10 +338,24 @@ local theme = lush(function(injected_functions)
     sym("@text.todo")({ fg = pink, gui = "bold" }),
 
     sym("@type.qualifier")({ fg = purple, gui = "bold" }),
-    sym("@type.builtin")({ fg = purple, gui = "bold" }),
+    sym("@type.builtin")({ fg = blue, gui = "italic" }),
+
+    sym("@type.@tag")({ fg = green, gui = "italic" }),
 
     sym("@variable")({ fg = fg }),
+    sym("@variable.parameter")({ fg = orange }),
     sym("@variable.builtin")({ fg = purple, gui = "bold" }),
+    -- sym("@variable.member")({ fg = green, gui = "bold" }),
+
+    -- sym("@lsp")({ fg = fg }),
+    sym("@lsp.type.variable")({ fg = fg }),
+    sym("@lsp.type.property")({ fg = fg }),
+    sym("@lsp.type.member")({ fg = green }),
+    sym("@lsp.type.parameter")({ fg = fg }),
+    sym("@lsp.typemod.defaultlibrary")({ fg = purple }),
+    sym("@lsp.typemod.function")({ fg = green }),
+    sym("@lsp.typemod.parameter")({ fg = fg }),
+    -- sym("@lsp.type.variable.typescript")({ fg = purple, gui = "bold" }),
   }
 end)
 
