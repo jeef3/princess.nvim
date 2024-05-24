@@ -1,8 +1,11 @@
 local lush = require("lush")
 local hsl = lush.hsl
 
-local mid_black = hsl("#1d1d26")
 local mid_white = hsl("#b3b3d4")
+local blah_black = hsl("#686889")
+local light_black = hsl("#4b4b50")
+local middish_black = hsl("#2C2C3E")
+local mid_black = hsl("#1d1d26")
 local white = mid_white.lighten(50)
 
 local pink = hsl("#ff3399")
@@ -21,6 +24,7 @@ local blue_bg = blue.mix(bg, 50).darken(50)
 local turquoise_bg = turquoise.mix(bg, 50).darken(50)
 local green_bg = green.mix(bg, 50).darken(50)
 local orange_bg = orange.mix(bg, 50).darken(50)
+local purple_bg = purple.mix(bg, 50).darken(50)
 
 local theme = lush(function(injected_functions)
   local sym = injected_functions.sym
@@ -29,11 +33,11 @@ local theme = lush(function(injected_functions)
     Normal({ bg = bg, fg = fg }),
 
     Cursor({ bg = mid_white }),
-    CursorLine({ bg = Normal.bg.lighten(5) }),
+    CursorLine({ bg = middish_black }),
     CursorColumn({ CursorLine }),
     ColorColumn({ bg = Normal.bg.darken(10) }),
 
-    Comment({ fg = bg.lighten(30), gui = "italic" }),
+    Comment({ fg = blah_black, gui = "italic" }),
 
     LineNr({ bg = Normal.bg.da(10), fg = Normal.bg.li(30) }),
     CursorLineNr({ bg = CursorLine.bg, fg = Normal.fg.ro(180) }),
@@ -52,22 +56,22 @@ local theme = lush(function(injected_functions)
     ErrorMsg({ fg = pink }),
     MsgArea({ bg = bg }),
 
-    VertSplit({ fg = bg.lighten(20), bg = bg }),
+    WinSeparator({ fg = bg.lighten(20), bg = bg }),
     SignColumn({ bg = bg }),
 
     TabLine({ fg = bg.lighten(30), bg = bg_dark }),
     TabLineSel({ fg = fg.lighten(10), bg = bg, gui = "bold" }),
     TabLineFill({ fg = fg, bg = bg_dark }),
-    TabLineSeparatorActive({ fg = pink, bg = bg }),
-    TabLineSeparatorInactive({ fg = bg.lighten(30), bg = bg_dark }),
-    TabLineModifiedSeparatorActive({ fg = blue, bg = bg }),
-    TabLineModifiedSeparatorInactive({ fg = bg.lighten(30), bg = bg_dark }),
-    TabLinePaddingActive({ fg = fg, bg = bg }),
-    TabLinePaddingInactive({ fg = fg, bg = bg_dark }),
-    TabLineModifiedActive({ fg = fg, bg = bg }),
-    TabLineModifiedInactive({ fg = fg, bg = bg_dark }),
-    TabLineCloseActive({ fg = fg, bg = bg, gui = "bold" }),
-    TabLineCloseInactive({ fg = bg.lighten(30), bg = bg_dark, gui = "bold" }),
+    TabLineSeparator({ fg = bg.lighten(30), bg = bg_dark }),
+    TabLineSeparatorSel({ fg = pink, bg = bg }),
+    -- TabLineModifiedSeparator({ fg = bg.lighten(30), bg = bg_dark }),
+    -- TabLineModifiedSeparatorSel({ fg = blue, bg = bg }),
+    -- TabLinePaddingActive({ fg = fg, bg = bg }),
+    -- TabLinePaddingInactive({ fg = fg, bg = bg_dark }),
+    TabLineModified({ fg = green, bg = bg_dark }),
+    TabLineModifiedSel({ fg = fg, bg = bg }),
+    TabLineClose({ fg = bg.lighten(30), bg = bg_dark, gui = "bold" }),
+    TabLineCloseSel({ fg = fg, bg = bg, gui = "bold" }),
 
     StatusLine({ fg = pink }),
     StatusLineNC({ fg = pink.darken(50) }),
@@ -230,17 +234,28 @@ local theme = lush(function(injected_functions)
       sp = bg.lighten(30),
     }),
 
-    TelescopeBorder({ fg = purple }),
-    TelescopeSelection({
-      fg = fg.lighten(10),
-      bg = bg.lighten(10),
-      gui = "bold",
-    }),
+    -- Telescope
+    TelescopeNormal({ bg = middish_black.darken(20) }),
+    TelescopeBorder({ bg = middish_black.darken(20) }),
+
+    TelescopeSelection({ fg = white, bg = blah_black }),
     TelescopeSelectionCaret({ fg = purple }),
-    TelescopeMatching({ fg = blue }),
+
+    TelescopeMatching({ fg = blue, gui = "bold" }),
+
+    TelescopePromptNormal({ fg = fg, bg = middish_black }),
+    TelescopePromptBorder({ fg = middish_black, bg = middish_black }),
+
+    TelescopePreviewBorder({ link = "TelescopeBorder" }),
+    TelescopePromptPrefix({ fg = light_black }),
 
     -- Noice
+    NoiceCmdline(TelescopePromptNormal),
+    NoiceCmdlinePopup(TelescopePromptNormal),
+    NoiceCmdlinePopupBorder(TelescopePromptBorder),
+    NoiceCmdlineIcon(TelescopePromptPrefix),
 
+    -- Git
     GitGutterAdd({ fg = green, bg = green_bg }),
     GitGutterChange({ fg = blue, bg = blue_bg }),
     GitGutterChangeDelete({ fg = blue, bg = blue_bg }),
@@ -300,6 +315,48 @@ local theme = lush(function(injected_functions)
     SagaBorder({ fg = purple }),
     SagaNormal({ fg = fg, bg = bg }),
 
+    -- Leap
+    LeapBackdrop({ fg = bg.lighten(20) }),
+    LeapMatch({ fg = pink, gui = "bold" }),
+    LeapLabelPrimary({ fg = green.darken(20) }),
+    LeapLabelSecondary({ fg = blue.darken(20) }),
+
+    -- Other
+    IlluminatedWordText({ bg = light_black }),
+    IlluminatedWordRead({ bg = light_black }),
+    IlluminatedWordWrite({ bg = light_black }),
+
+    -- Rainbow Delimiters
+    RainbowDelimiterYellow({ fg = orange }),
+    RainbowDelimiterPurple({ fg = purple }),
+    RainbowDelimiterBlue({ fg = blue }),
+
+    -- Notify
+    NotifyERRORBorder({ fg = pink_bg }),
+    NotifyWARNBorder({ fg = orange_bg }),
+    NotifyINFOBorder({ fg = green_bg }),
+    NotifyDEBUGBorder({ fg = light_black }),
+    NotifyTRACEBorder({ fg = purple_bg }),
+
+    NotifyERRORIcon({ fg = pink }),
+    NotifyWARNIcon({ fg = orange }),
+    NotifyINFOIcon({ fg = green }),
+    NotifyDEBUGIcon({ fg = mid_white }),
+    NotifyTRACEIcon({ fg = purple }),
+
+    NotifyERRORTitle({ fg = pink }),
+    NotifyWARNTitle({ fg = orange }),
+    NotifyINFOTitle({ fg = green }),
+    NotifyDEBUGTitle({ fg = mid_white }),
+    NotifyTRACETitle({ fg = purple }),
+
+    -- HlSearchNear({ fg = blue, bg = orange }),
+    HlSearchLens({ fg = light_black }),
+    HlSearchLensNear({ fg = blah_black, gui = "bold" }),
+
+    -- Indent
+    MiniIndentscopeSymbol({ fg = light_black }),
+
     -- Newer syntax
     sym("@conditional.ternary")({ fg = pink, gui = "bold" }),
 
@@ -307,14 +364,18 @@ local theme = lush(function(injected_functions)
 
     sym("@constructor")({ fg = blue }),
 
-    sym("@keyword")({ fg = fg }),
+    sym("@keyword")({ fg = blue, gui = "bold italic" }),
+    sym("@keyword.lua")({ fg = pink, gui = "bold" }),
     sym("@keyword.function")({ fg = blue, gui = "bold italic" }),
     sym("@keyword.return")({ fg = pink, gui = "bold" }),
     sym("@keyword.import")({ fg = pink, gui = "bold" }),
     sym("@keyword.conditional")({ fg = pink, gui = "bold" }),
     sym("@keyword.coroutine")({ fg = pink, gui = "bold" }),
 
-    sym("@markup.heading")({ gui = "bold" }),
+    sym("@markup.heading")({ fg = orange, gui = "bold" }),
+    sym("@markup.list")({ fg = orange, gui = "bold" }),
+    sym("@markup.italic")({ gui = "italic" }),
+    sym("@markup.strong")({ gui = "bold" }),
 
     sym("@function.builtin")({ fg = turquoise }),
     sym("@function.call")({ fg = green }),
@@ -351,10 +412,11 @@ local theme = lush(function(injected_functions)
     sym("@lsp.type.variable")({ fg = fg }),
     sym("@lsp.type.property")({ fg = fg }),
     sym("@lsp.type.member")({ fg = green }),
-    sym("@lsp.type.parameter")({ fg = fg }),
+    sym("@lsp.type.parameter")({ fg = orange }),
+    sym("@lsp.type.type")({ fg = fg.darken(10), gui = "italic" }),
     sym("@lsp.typemod.defaultlibrary")({ fg = purple }),
     sym("@lsp.typemod.function")({ fg = green }),
-    sym("@lsp.typemod.parameter")({ fg = fg }),
+    sym("@lsp.typemod.parameter.declaration")({ fg = orange, gui = "italic" }),
     -- sym("@lsp.type.variable.typescript")({ fg = purple, gui = "bold" }),
   }
 end)
