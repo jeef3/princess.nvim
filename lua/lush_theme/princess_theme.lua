@@ -31,6 +31,8 @@ local theme = lush(function(injected_functions)
 
   return {
     Normal({ bg = bg, fg = fg }),
+    NormalNC({ bg = bg, fg = fg }),
+    NormalFloat({ bg = middish_black.darken(20) }),
 
     Cursor({ bg = mid_white }),
     CursorLine({ bg = middish_black }),
@@ -68,7 +70,7 @@ local theme = lush(function(injected_functions)
     -- TabLineModifiedSeparatorSel({ fg = blue, bg = bg }),
     -- TabLinePaddingActive({ fg = fg, bg = bg }),
     -- TabLinePaddingInactive({ fg = fg, bg = bg_dark }),
-    TabLineModified({ fg = green, bg = bg_dark }),
+    TabLineModified({ fg = fg, bg = bg_dark }),
     TabLineModifiedSel({ fg = fg, bg = bg }),
     TabLineClose({ fg = bg.lighten(30), bg = bg_dark, gui = "bold" }),
     TabLineCloseSel({ fg = fg, bg = bg, gui = "bold" }),
