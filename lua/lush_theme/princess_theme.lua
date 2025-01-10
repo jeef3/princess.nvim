@@ -392,6 +392,9 @@ local theme = lush(function(injected_functions)
     sym("@punctuation.delimiter")({ fg = pink, gui = "bold" }),
     sym("@punctuation.special")({ fg = pink }),
 
+    sym("@string", { fg = orange }),
+    sym("@string.documentation", { fg = blah_black, gui = "italic" }),
+
     sym("@tag")({ fg = blue }),
     sym("@tag.builtin")({ fg = pink }),
     sym("@tag.attribute")({ fg = green }),
