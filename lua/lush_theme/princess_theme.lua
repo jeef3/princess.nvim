@@ -200,7 +200,7 @@ local theme = lush(function(injected_functions)
     LspDiagnosticsDefaultWarning({ DiagnosticVirtualTextWarning }),
     LspDiagnosticsVirtualTextWarning({ DiagnosticVirtualTextWarning }),
 
-    DiagnosticHint({ fg = blue.lighten(50) }),
+    DiagnosticHint({ fg = blue }),
     DiagnosticDefaultHint({ DiagnosticHint }),
     LspDiagnosticsHint({ DiagnosticHint }),
     LspDiagnosticsSignHint({ DiagnosticHint }),
